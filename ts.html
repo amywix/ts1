@@ -1,0 +1,416 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Worker Timesheet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <script src="script.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Support Worker Timesheet</h1>
+        <form id="timesheetForm">
+            <!-- Structure for Each Day with 4 Shifts -->
+            <!-- Monday -->
+            <div class="form-row">
+                <div class="col-2"><label>Monday:</label></div>
+                <div class="col"><input type="date" id="mondayDate" required></div>
+                <div class="col-12">
+                    <div>
+                        <label>Shift 1:</label>
+                        <input type="time" id="mondayStartTime1" required> to
+                        <input type="time" id="mondayEndTime1" required>
+                        <select id="mondayShiftType1" required>
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 2:</label>
+                        <input type="time" id="mondayStartTime2"> to
+                        <input type="time" id="mondayEndTime2">
+                        <select id="mondayShiftType2">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 3:</label>
+                        <input type="time" id="mondayStartTime3"> to
+                        <input type="time" id="mondayEndTime3">
+                        <select id="mondayShiftType3">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 4:</label>
+                        <input type="time" id="mondayStartTime4"> to
+                        <input type="time" id="mondayEndTime4">
+                        <select id="mondayShiftType4">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2"><button type="button" class="btn" onclick="saveShift('monday')">Save Shifts</button></div>
+            </div>
+
+            <!-- Tuesday -->
+            <div class="form-row">
+                <div class="col-2"><label>Tuesday:</label></div>
+                <div class="col"><input type="date" id="tuesdayDate" required></div>
+                <div class="col-12">
+                    <div>
+                        <label>Shift 1:</label>
+                        <input type="time" id="tuesdayStartTime1" required> to
+                        <input type="time" id="tuesdayEndTime1" required>
+                        <select id="tuesdayShiftType1" required>
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 2:</label>
+                        <input type="time" id="tuesdayStartTime2"> to
+                        <input type="time" id="tuesdayEndTime2">
+                        <select id="tuesdayShiftType2">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 3:</label>
+                        <input type="time" id="tuesdayStartTime3"> to
+                        <input type="time" id="tuesdayEndTime3">
+                        <select id="tuesdayShiftType3">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 4:</label>
+                        <input type="time" id="tuesdayStartTime4"> to
+                        <input type="time" id="tuesdayEndTime4">
+                        <select id="tuesdayShiftType4">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2"><button type="button" class="btn" onclick="saveShift('tuesday')">Save Shifts</button></div>
+            </div>
+
+            <!-- Wednesday -->
+            <div class="form-row">
+                <div class="col-2"><label>Wednesday:</label></div>
+                <div class="col"><input type="date" id="wednesdayDate" required></div>
+                <div class="col-12">
+                    <div>
+                        <label>Shift 1:</label>
+                        <input type="time" id="wednesdayStartTime1" required> to
+                        <input type="time" id="wednesdayEndTime1" required>
+                        <select id="wednesdayShiftType1" required>
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 2:</label>
+                        <input type="time" id="wednesdayStartTime2"> to
+                        <input type="time" id="wednesdayEndTime2">
+                        <select id="wednesdayShiftType2">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 3:</label>
+                        <input type="time" id="wednesdayStartTime3"> to
+                        <input type="time" id="wednesdayEndTime3">
+                        <select id="wednesdayShiftType3">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 4:</label>
+                        <input type="time" id="wednesdayStartTime4"> to
+                        <input type="time" id="wednesdayEndTime4">
+                        <select id="wednesdayShiftType4">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2"><button type="button" class="btn" onclick="saveShift('wednesday')">Save Shifts</button></div>
+            </div>
+
+            <!-- Thursday -->
+            <div class="form-row">
+                <div class="col-2"><label>Thursday:</label></div>
+                <div class="col"><input type="date" id="thursdayDate" required></div>
+                <div class="col-12">
+                    <div>
+                        <label>Shift 1:</label>
+                        <input type="time" id="thursdayStartTime1" required> to
+                        <input type="time" id="thursdayEndTime1" required>
+                        <select id="thursdayShiftType1" required>
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 2:</label>
+                        <input type="time" id="thursdayStartTime2"> to
+                        <input type="time" id="thursdayEndTime2">
+                        <select id="thursdayShiftType2">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 3:</label>
+                        <input type="time" id="thursdayStartTime3"> to
+                        <input type="time" id="thursdayEndTime3">
+                        <select id="thursdayShiftType3">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 4:</label>
+                        <input type="time" id="thursdayStartTime4"> to
+                        <input type="time" id="thursdayEndTime4">
+                        <select id="thursdayShiftType4">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2"><button type="button" class="btn" onclick="saveShift('thursday')">Save Shifts</button></div>
+            </div>
+
+            <!-- Friday -->
+            <div class="form-row">
+                <div class="col-2"><label>Friday:</label></div>
+                <div class="col"><input type="date" id="fridayDate" required></div>
+                <div class="col-12">
+                    <div>
+                        <label>Shift 1:</label>
+                        <input type="time" id="fridayStartTime1" required> to
+                        <input type="time" id="fridayEndTime1" required>
+                        <select id="fridayShiftType1" required>
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 2:</label>
+                        <input type="time" id="fridayStartTime2"> to
+                        <input type="time" id="fridayEndTime2">
+                        <select id="fridayShiftType2">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 3:</label>
+                        <input type="time" id="fridayStartTime3"> to
+                        <input type="time" id="fridayEndTime3">
+                        <select id="fridayShiftType3">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 4:</label>
+                        <input type="time" id="fridayStartTime4"> to
+                        <input type="time" id="fridayEndTime4">
+                        <select id="fridayShiftType4">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2"><button type="button" class="btn" onclick="saveShift('friday')">Save Shifts</button></div>
+            </div>
+
+            <!-- Saturday -->
+            <div class="form-row">
+                <div class="col-2"><label>Saturday:</label></div>
+                <div class="col"><input type="date" id="saturdayDate" required></div>
+                <div class="col-12">
+                    <div>
+                        <label>Shift 1:</label>
+                        <input type="time" id="saturdayStartTime1" required> to
+                        <input type="time" id="saturdayEndTime1" required>
+                        <select id="saturdayShiftType1" required>
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 2:</label>
+                        <input type="time" id="saturdayStartTime2"> to
+                        <input type="time" id="saturdayEndTime2">
+                        <select id="saturdayShiftType2">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 3:</label>
+                        <input type="time" id="saturdayStartTime3"> to
+                        <input type="time" id="saturdayEndTime3">
+                        <select id="saturdayShiftType3">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 4:</label>
+                        <input type="time" id="saturdayStartTime4"> to
+                        <input type="time" id="saturdayEndTime4">
+                        <select id="saturdayShiftType4">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2"><button type="button" class="btn" onclick="saveShift('saturday')">Save Shifts</button></div>
+            </div>
+
+            <!-- Sunday -->
+            <div class="form-row">
+                <div class="col-2"><label>Sunday:</label></div>
+                <div class="col"><input type="date" id="sundayDate" required></div>
+                <div class="col-12">
+                    <div>
+                        <label>Shift 1:</label>
+                        <input type="time" id="sundayStartTime1" required> to
+                        <input type="time" id="sundayEndTime1" required>
+                        <select id="sundayShiftType1" required>
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 2:</label>
+                        <input type="time" id="sundayStartTime2"> to
+                        <input type="time" id="sundayEndTime2">
+                        <select id="sundayShiftType2">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 3:</label>
+                        <input type="time" id="sundayStartTime3"> to
+                        <input type="time" id="sundayEndTime3">
+                        <select id="sundayShiftType3">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Shift 4:</label>
+                        <input type="time" id="sundayStartTime4"> to
+                        <input type="time" id="sundayEndTime4">
+                        <select id="sundayShiftType4">
+                            <option value="standard">Standard</option>
+                            <option value="sleepover">Sleepover</option>
+                            <option value="annual leave">Annual Leave</option>
+                            <option value="personal leave">Personal Leave</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2"><button type="button" class="btn" onclick="saveShift('sunday')">Save Shifts</button></div>
+            </div>
+        </form>
+
+        <div id="shiftList">
+            <h2>Shift List</h2>
+            <table id="shiftEntriesTable" class="shift-entries-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>Finish Time</th>
+                        <th>Total Hours</th>
+                        <th>Shift Type</th>
+                    </tr>
+                </thead>
+                <tbody id="shiftEntries"></tbody>
+            </table>
+            <button class="btn" onclick="downloadPDF()">Download PDF</button>
+        </div>
+
+        <div id="totals">
+            <h2>Totals</h2>
+            <p id="weeklyTotal">Weekly Total: 0 hours</p>
+            <p id="biWeeklyTotal">Bi-Weekly Total: 0 hours</p>
+        </div>
+    </div>
+
+
+</body>
+</html>

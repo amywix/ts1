@@ -1,0 +1,120 @@
+﻿/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styles */
+.container {
+    background-color: lightgray;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    max-width: 95%;
+    margin: auto;
+}
+
+/* Form row and column layout adjustments */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.col {
+    flex: 1;
+    margin: 5px;
+}
+
+.col-2 {
+    flex: 0 0 25%;
+}
+
+/* Table styles */
+.shift-entries-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+    .shift-entries-table th, .shift-entries-table td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #ccc;
+        font-size: 0.9em;
+    }
+
+    .shift-entries-table th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    .shift-entries-table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+/* Button styling */
+.btn {
+    padding: 10px;
+    font-size: 1rem;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Input placeholder styling */
+input::placeholder {
+    font-size: 0.8em;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    /* Stack columns vertically */
+    .col, .col-2 {
+        flex: 1 0 100%;
+    }
+
+    /* Make buttons and inputs full width */
+    .btn, input[type="time"], input[type="date"], select {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    /* Adjust font sizes for smaller screens */
+    h1, h2, p {
+        font-size: 1.2em;
+    }
+
+    .shift-entries-table th, .shift-entries-table td {
+        font-size: 0.8em;
+        padding: 10px;
+    }
+
+    /* Hide or shorten table headers to fit screen */
+    .shift-entries-table th {
+        display: none;
+    }
+
+    /* Alternative layout for mobile-friendly table rows */
+    .shift-entries-table td {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 8px;
+    }
+
+        .shift-entries-table td::before {
+            content: attr(data-label); /* Adding labels for each cell in mobile view */
+            font-weight: bold;
+            text-transform: capitalize;
+            display: inline-block;
+            width: 40%;
+        }
+}
